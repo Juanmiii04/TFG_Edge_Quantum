@@ -3,8 +3,11 @@ import random
 import math
 
 #GENERADOR DE RED
-def generar_red(num_serv, num_usr, capacidad_max, radio_cobertura=50):
-    
+def generar_red(num_serv, num_usr, capacidad_max, radio_cobertura, seed=None, lado_area=100):
+
+    if seed is not None:
+        random.seed(seed)
+
     G = nx.Graph()
     list_serv =  []
     list_usr =  []
@@ -12,24 +15,24 @@ def generar_red(num_serv, num_usr, capacidad_max, radio_cobertura=50):
     # Servidores (con capacidad y posición x,y)
     for i in range(num_serv):
         nombre_servidor = f"Servidor_{i}"
-        coord_x = random.randint(0, 100)
-        coord_y = random.randint(0, 100)
-        G.add_node(nombre_servidor, tipo="servidor", capacidad=capacidad_max, pos=(coord_x, coord_y))
+        cord_x = random.randint(0, lado_area)
+        cord_y = random.randint(0, lado_area)
+        G.add_node(nombre_servidor, tipo="servidor", capacidad=capacidad_max, pos=(cord_x, cord_y))
         list_serv.append(nombre_servidor)
 
     # Usuarios (demanda de recursos y posición x,y)
     for i in range(num_usr):
         nombre_usuario = f"Usuario_{i}"
-        coord_x = random.randint(0, 100)
-        coord_y = random.randint(0, 100)
+        cord_x = random.randint(0, lado_area)
+        cord_y = random.randint(0, lado_area)
         
-        #Asignamos una demanda aleatoria
+        #Asignamos una demanda aleatoria(recursos que consumirá en el servidor)
         demanda_recursos = random.randint(1, 3) 
         
-        G.add_node(nombre_usuario, tipo="usuario", pos=(coord_x, coord_y), demanda=demanda_recursos)
+        G.add_node(nombre_usuario, tipo="usuario", pos=(cord_x, cord_y), demanda=demanda_recursos)
         list_usr.append(nombre_usuario)
 
-    # Creamos cables con sus latencias
+    # Creamos los cables con sus latencias
     for usuario in list_usr:
         pos_u = G.nodes[usuario]['pos']
         
@@ -52,7 +55,7 @@ def generar_red(num_serv, num_usr, capacidad_max, radio_cobertura=50):
                 #le damos un poco de 'realismo' para sacar las latencias
                 latencia_base = 5.0 
                 saltos_router = distancia_km // 10 #suponemos que hay un router/switch cada 10km
-                retardo_saltos = saltos_router * 4.0 #tiempo en ese router
+                retardo_saltos = saltos_router * 5.0 #tiempo en ese router
                 ruido_red = random.uniform(-2.0, 5.0)
                 latencia_total = int(latencia_base + retardo_saltos + ruido_red) #sacamos la latencia total
                 

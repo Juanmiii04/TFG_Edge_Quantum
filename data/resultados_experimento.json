@@ -1,0 +1,41 @@
+{
+    "escenario_grande": {
+        "num_servidores": 6,
+        "num_usuarios": 30,
+        "capacidad_max": 12,
+        "radio_cobertura": 60,
+        "seed": 42,
+        "voraz": {
+            "latencia_total": 1395,
+            "tiempo_s": 0.0004817000008188188,
+            "usuarios_asignados": 29
+        },
+        "exacto": {
+            "latencia_total": 400,
+            "tiempo_s": 0.036863000000266766,
+            "usuarios_asignados": 30
+        }
+    },
+    "escenario_reducido": {
+        "num_servidores": 1,
+        "num_usuarios": 2,
+        "capacidad_max": 5,
+        "radio_cobertura": 100,
+        "seed": 7,
+        "voraz": {
+            "latencia_total": 63,
+            "tiempo_s": 0.0003507000001263805,
+            "usuarios_asignados": 2
+        },
+        "exacto": {
+            "latencia_total": 63,
+            "tiempo_s": 0.013282599999911326,
+            "usuarios_asignados": 2
+        },
+        "cuantico": {
+            "latencia_total": 63,
+            "tiempo_s": 31.883992000000035,
+            "usuarios_asignados": 2
+        }
+    }
+}

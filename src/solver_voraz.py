@@ -5,14 +5,14 @@ def solver_voraz(G, lista_servidores, lista_usuarios):
     
     #Prepararamos los  contadores
     ocupacion_servidores = {s: 0 for s in lista_servidores}#con un diccionario llevamos la ocupación de cada servidor
-    asignaciones = {} # Guarda el usuario y la latencia en el servidor que hemos asignado
+    asignaciones = {} # Guardamos el usuario y la latencia en el servidor que hemos asignado
     latencia_asignada = 0
     usuarios_sin_asignar = []
 
     #Buscamos el sitio para cada usuario
     for usuario in lista_usuarios:
         # Obtenemos la demanda del usuario 
-        demanda_usr = G.nodes[usuario].get('demanda', 1)
+        demanda_usr = G.nodes[usuario].get('demanda', 1) #si por lo que sea no tiene asignada una demanda, le asignamos por defecto 1
         
         # Ordenamos las latencias de menor a mayor
         conexiones = G[usuario]
@@ -42,19 +42,28 @@ def solver_voraz(G, lista_servidores, lista_usuarios):
     latencia_penalizacion = len(usuarios_sin_asignar) * PENALIZACION
     latencia_total = latencia_asignada + latencia_penalizacion
 
-    #Mostramos resultado
+    # Mostramos resultado
     for servidor in lista_servidores:
-        # Filtramos los usuarios que han acabado en cada servidor y mostramos su demanda
-        usuarios_este_servidor = [
-            f"{u} ({asignaciones[u][1]}ms, dem: {G.nodes[u].get('demanda', 1)})" 
-            for u in asignaciones if asignaciones[u][0] == servidor
-        ]
-        print(f" {servidor} (Ocupación recursos: {ocupacion_servidores[servidor]}/{G.nodes[servidor]['capacidad']}): {', '.join(usuarios_este_servidor)}")
+        usuarios_este_servidor = []
     
+        for u, (servidor_asignado, latencia) in asignaciones.items():
+            if servidor_asignado == servidor:
+                demanda = G.nodes[u].get('demanda', 1)
+                usuarios_este_servidor.append(f"{u} ({latencia}ms, dem: {demanda})")
+    
+        ocupacion = ocupacion_servidores[servidor]
+        capacidad = G.nodes[servidor]['capacidad']
+    
+        texto_usuarios = ', '.join(usuarios_este_servidor)
+        print(f" {servidor} (Ocupación recursos: {ocupacion}/{capacidad}): {texto_usuarios}")
+
     print(f"\n Latencia total de la red (Voraz): {latencia_total} ms")
+
     if usuarios_sin_asignar:
-        print(f" -> Detalle: {latencia_asignada} ms (Asignados) + {latencia_penalizacion} ms (Penalización por {len(usuarios_sin_asignar)} desconectados)")
-        print(f" Usuarios desconectados: {', '.join(usuarios_sin_asignar)}")
-    
-    
+        num_desc = len(usuarios_sin_asignar)
+        texto_desc = ', '.join(usuarios_sin_asignar)
+
+        print(f" -> Latencia total detallada: {latencia_asignada} ms (Asignados) + {latencia_penalizacion} ms (Penalización por {num_desc} desconectados)")
+        print(f" Usuarios desconectados: {texto_desc}")
+
     return asignaciones, latencia_total

@@ -1,0 +1,925 @@
+{
+    "servidores": [
+        "Servidor_0",
+        "Servidor_1",
+        "Servidor_2",
+        "Servidor_3",
+        "Servidor_4",
+        "Servidor_5"
+    ],
+    "usuarios": [
+        "Usuario_0",
+        "Usuario_1",
+        "Usuario_2",
+        "Usuario_3",
+        "Usuario_4",
+        "Usuario_5",
+        "Usuario_6",
+        "Usuario_7",
+        "Usuario_8",
+        "Usuario_9",
+        "Usuario_10",
+        "Usuario_11",
+        "Usuario_12",
+        "Usuario_13",
+        "Usuario_14",
+        "Usuario_15",
+        "Usuario_16",
+        "Usuario_17",
+        "Usuario_18",
+        "Usuario_19",
+        "Usuario_20",
+        "Usuario_21",
+        "Usuario_22",
+        "Usuario_23",
+        "Usuario_24",
+        "Usuario_25",
+        "Usuario_26",
+        "Usuario_27",
+        "Usuario_28",
+        "Usuario_29"
+    ],
+    "grafo": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+            {
+                "tipo": "servidor",
+                "capacidad": 12,
+                "pos": [
+                    71,
+                    1
+                ],
+                "id": "Servidor_0"
+            },
+            {
+                "tipo": "servidor",
+                "capacidad": 12,
+                "pos": [
+                    60,
+                    83
+                ],
+                "id": "Servidor_1"
+            },
+            {
+                "tipo": "servidor",
+                "capacidad": 12,
+                "pos": [
+                    66,
+                    38
+                ],
+                "id": "Servidor_2"
+            },
+            {
+                "tipo": "servidor",
+                "capacidad": 12,
+                "pos": [
+                    98,
+                    69
+                ],
+                "id": "Servidor_3"
+            },
+            {
+                "tipo": "servidor",
+                "capacidad": 12,
+                "pos": [
+                    53,
+                    90
+                ],
+                "id": "Servidor_4"
+            },
+            {
+                "tipo": "servidor",
+                "capacidad": 12,
+                "pos": [
+                    29,
+                    12
+                ],
+                "id": "Servidor_5"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    47,
+                    79
+                ],
+                "demanda": 1,
+                "id": "Usuario_0"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    43,
+                    82
+                ],
+                "demanda": 2,
+                "id": "Usuario_1"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    73,
+                    26
+                ],
+                "demanda": 1,
+                "id": "Usuario_2"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    97,
+                    73
+                ],
+                "demanda": 1,
+                "id": "Usuario_3"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    6,
+                    74
+                ],
+                "demanda": 3,
+                "id": "Usuario_4"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    17,
+                    49
+                ],
+                "demanda": 3,
+                "id": "Usuario_5"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    3,
+                    19
+                ],
+                "demanda": 2,
+                "id": "Usuario_6"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    31,
+                    23
+                ],
+                "demanda": 1,
+                "id": "Usuario_7"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    78,
+                    25
+                ],
+                "demanda": 3,
+                "id": "Usuario_8"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    27,
+                    56
+                ],
+                "demanda": 1,
+                "id": "Usuario_9"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    91,
+                    49
+                ],
+                "demanda": 1,
+                "id": "Usuario_10"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    85,
+                    8
+                ],
+                "demanda": 1,
+                "id": "Usuario_11"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    67,
+                    86
+                ],
+                "demanda": 1,
+                "id": "Usuario_12"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    24,
+                    22
+                ],
+                "demanda": 1,
+                "id": "Usuario_13"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    70,
+                    63
+                ],
+                "demanda": 3,
+                "id": "Usuario_14"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    81,
+                    46
+                ],
+                "demanda": 1,
+                "id": "Usuario_15"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    84,
+                    86
+                ],
+                "demanda": 1,
+                "id": "Usuario_16"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    74,
+                    47
+                ],
+                "demanda": 1,
+                "id": "Usuario_17"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    72,
+                    86
+                ],
+                "demanda": 1,
+                "id": "Usuario_18"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    67,
+                    70
+                ],
+                "demanda": 1,
+                "id": "Usuario_19"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    78,
+                    63
+                ],
+                "demanda": 2,
+                "id": "Usuario_20"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    86,
+                    46
+                ],
+                "demanda": 2,
+                "id": "Usuario_21"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    47,
+                    24
+                ],
+                "demanda": 3,
+                "id": "Usuario_22"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    59,
+                    70
+                ],
+                "demanda": 2,
+                "id": "Usuario_23"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    87,
+                    5
+                ],
+                "demanda": 3,
+                "id": "Usuario_24"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    27,
+                    23
+                ],
+                "demanda": 2,
+                "id": "Usuario_25"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    89,
+                    59
+                ],
+                "demanda": 1,
+                "id": "Usuario_26"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    1,
+                    24
+                ],
+                "demanda": 2,
+                "id": "Usuario_27"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    18,
+                    74
+                ],
+                "demanda": 2,
+                "id": "Usuario_28"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    59,
+                    1
+                ],
+                "demanda": 1,
+                "id": "Usuario_29"
+            }
+        ],
+        "edges": [
+            {
+                "weight": 18,
+                "source": "Servidor_0",
+                "target": "Usuario_2"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_0",
+                "target": "Usuario_7"
+            },
+            {
+                "weight": 13,
+                "source": "Servidor_0",
+                "target": "Usuario_8"
+            },
+            {
+                "weight": 34,
+                "source": "Servidor_0",
+                "target": "Usuario_10"
+            },
+            {
+                "weight": 14,
+                "source": "Servidor_0",
+                "target": "Usuario_11"
+            },
+            {
+                "weight": 30,
+                "source": "Servidor_0",
+                "target": "Usuario_13"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_0",
+                "target": "Usuario_15"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_0",
+                "target": "Usuario_17"
+            },
+            {
+                "weight": 25,
+                "source": "Servidor_0",
+                "target": "Usuario_21"
+            },
+            {
+                "weight": 24,
+                "source": "Servidor_0",
+                "target": "Usuario_22"
+            },
+            {
+                "weight": 14,
+                "source": "Servidor_0",
+                "target": "Usuario_24"
+            },
+            {
+                "weight": 26,
+                "source": "Servidor_0",
+                "target": "Usuario_25"
+            },
+            {
+                "weight": 12,
+                "source": "Servidor_0",
+                "target": "Usuario_29"
+            },
+            {
+                "weight": 13,
+                "source": "Servidor_1",
+                "target": "Usuario_0"
+            },
+            {
+                "weight": 8,
+                "source": "Servidor_1",
+                "target": "Usuario_1"
+            },
+            {
+                "weight": 31,
+                "source": "Servidor_1",
+                "target": "Usuario_2"
+            },
+            {
+                "weight": 20,
+                "source": "Servidor_1",
+                "target": "Usuario_3"
+            },
+            {
+                "weight": 28,
+                "source": "Servidor_1",
+                "target": "Usuario_4"
+            },
+            {
+                "weight": 29,
+                "source": "Servidor_1",
+                "target": "Usuario_5"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_1",
+                "target": "Usuario_9"
+            },
+            {
+                "weight": 23,
+                "source": "Servidor_1",
+                "target": "Usuario_10"
+            },
+            {
+                "weight": 8,
+                "source": "Servidor_1",
+                "target": "Usuario_12"
+            },
+            {
+                "weight": 19,
+                "source": "Servidor_1",
+                "target": "Usuario_14"
+            },
+            {
+                "weight": 29,
+                "source": "Servidor_1",
+                "target": "Usuario_15"
+            },
+            {
+                "weight": 13,
+                "source": "Servidor_1",
+                "target": "Usuario_16"
+            },
+            {
+                "weight": 18,
+                "source": "Servidor_1",
+                "target": "Usuario_17"
+            },
+            {
+                "weight": 10,
+                "source": "Servidor_1",
+                "target": "Usuario_18"
+            },
+            {
+                "weight": 11,
+                "source": "Servidor_1",
+                "target": "Usuario_19"
+            },
+            {
+                "weight": 17,
+                "source": "Servidor_1",
+                "target": "Usuario_20"
+            },
+            {
+                "weight": 25,
+                "source": "Servidor_1",
+                "target": "Usuario_21"
+            },
+            {
+                "weight": 8,
+                "source": "Servidor_1",
+                "target": "Usuario_23"
+            },
+            {
+                "weight": 23,
+                "source": "Servidor_1",
+                "target": "Usuario_26"
+            },
+            {
+                "weight": 24,
+                "source": "Servidor_1",
+                "target": "Usuario_28"
+            },
+            {
+                "weight": 29,
+                "source": "Servidor_2",
+                "target": "Usuario_0"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_2",
+                "target": "Usuario_1"
+            },
+            {
+                "weight": 10,
+                "source": "Servidor_2",
+                "target": "Usuario_2"
+            },
+            {
+                "weight": 24,
+                "source": "Servidor_2",
+                "target": "Usuario_3"
+            },
+            {
+                "weight": 32,
+                "source": "Servidor_2",
+                "target": "Usuario_5"
+            },
+            {
+                "weight": 18,
+                "source": "Servidor_2",
+                "target": "Usuario_7"
+            },
+            {
+                "weight": 11,
+                "source": "Servidor_2",
+                "target": "Usuario_8"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_2",
+                "target": "Usuario_9"
+            },
+            {
+                "weight": 17,
+                "source": "Servidor_2",
+                "target": "Usuario_10"
+            },
+            {
+                "weight": 19,
+                "source": "Servidor_2",
+                "target": "Usuario_11"
+            },
+            {
+                "weight": 29,
+                "source": "Servidor_2",
+                "target": "Usuario_12"
+            },
+            {
+                "weight": 29,
+                "source": "Servidor_2",
+                "target": "Usuario_13"
+            },
+            {
+                "weight": 18,
+                "source": "Servidor_2",
+                "target": "Usuario_14"
+            },
+            {
+                "weight": 14,
+                "source": "Servidor_2",
+                "target": "Usuario_15"
+            },
+            {
+                "weight": 31,
+                "source": "Servidor_2",
+                "target": "Usuario_16"
+            },
+            {
+                "weight": 9,
+                "source": "Servidor_2",
+                "target": "Usuario_17"
+            },
+            {
+                "weight": 23,
+                "source": "Servidor_2",
+                "target": "Usuario_18"
+            },
+            {
+                "weight": 18,
+                "source": "Servidor_2",
+                "target": "Usuario_19"
+            },
+            {
+                "weight": 13,
+                "source": "Servidor_2",
+                "target": "Usuario_20"
+            },
+            {
+                "weight": 16,
+                "source": "Servidor_2",
+                "target": "Usuario_21"
+            },
+            {
+                "weight": 13,
+                "source": "Servidor_2",
+                "target": "Usuario_22"
+            },
+            {
+                "weight": 19,
+                "source": "Servidor_2",
+                "target": "Usuario_23"
+            },
+            {
+                "weight": 20,
+                "source": "Servidor_2",
+                "target": "Usuario_24"
+            },
+            {
+                "weight": 25,
+                "source": "Servidor_2",
+                "target": "Usuario_25"
+            },
+            {
+                "weight": 23,
+                "source": "Servidor_2",
+                "target": "Usuario_26"
+            },
+            {
+                "weight": 33,
+                "source": "Servidor_2",
+                "target": "Usuario_28"
+            },
+            {
+                "weight": 20,
+                "source": "Servidor_2",
+                "target": "Usuario_29"
+            },
+            {
+                "weight": 29,
+                "source": "Servidor_3",
+                "target": "Usuario_0"
+            },
+            {
+                "weight": 32,
+                "source": "Servidor_3",
+                "target": "Usuario_1"
+            },
+            {
+                "weight": 23,
+                "source": "Servidor_3",
+                "target": "Usuario_2"
+            },
+            {
+                "weight": 8,
+                "source": "Servidor_3",
+                "target": "Usuario_3"
+            },
+            {
+                "weight": 23,
+                "source": "Servidor_3",
+                "target": "Usuario_8"
+            },
+            {
+                "weight": 16,
+                "source": "Servidor_3",
+                "target": "Usuario_10"
+            },
+            {
+                "weight": 18,
+                "source": "Servidor_3",
+                "target": "Usuario_12"
+            },
+            {
+                "weight": 14,
+                "source": "Servidor_3",
+                "target": "Usuario_14"
+            },
+            {
+                "weight": 13,
+                "source": "Servidor_3",
+                "target": "Usuario_15"
+            },
+            {
+                "weight": 14,
+                "source": "Servidor_3",
+                "target": "Usuario_16"
+            },
+            {
+                "weight": 22,
+                "source": "Servidor_3",
+                "target": "Usuario_17"
+            },
+            {
+                "weight": 19,
+                "source": "Servidor_3",
+                "target": "Usuario_18"
+            },
+            {
+                "weight": 20,
+                "source": "Servidor_3",
+                "target": "Usuario_19"
+            },
+            {
+                "weight": 18,
+                "source": "Servidor_3",
+                "target": "Usuario_20"
+            },
+            {
+                "weight": 18,
+                "source": "Servidor_3",
+                "target": "Usuario_21"
+            },
+            {
+                "weight": 22,
+                "source": "Servidor_3",
+                "target": "Usuario_23"
+            },
+            {
+                "weight": 8,
+                "source": "Servidor_3",
+                "target": "Usuario_26"
+            },
+            {
+                "weight": 8,
+                "source": "Servidor_4",
+                "target": "Usuario_0"
+            },
+            {
+                "weight": 11,
+                "source": "Servidor_4",
+                "target": "Usuario_1"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_4",
+                "target": "Usuario_3"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_4",
+                "target": "Usuario_4"
+            },
+            {
+                "weight": 33,
+                "source": "Servidor_4",
+                "target": "Usuario_5"
+            },
+            {
+                "weight": 24,
+                "source": "Servidor_4",
+                "target": "Usuario_9"
+            },
+            {
+                "weight": 34,
+                "source": "Servidor_4",
+                "target": "Usuario_10"
+            },
+            {
+                "weight": 8,
+                "source": "Servidor_4",
+                "target": "Usuario_12"
+            },
+            {
+                "weight": 19,
+                "source": "Servidor_4",
+                "target": "Usuario_14"
+            },
+            {
+                "weight": 34,
+                "source": "Servidor_4",
+                "target": "Usuario_15"
+            },
+            {
+                "weight": 24,
+                "source": "Servidor_4",
+                "target": "Usuario_16"
+            },
+            {
+                "weight": 27,
+                "source": "Servidor_4",
+                "target": "Usuario_17"
+            },
+            {
+                "weight": 10,
+                "source": "Servidor_4",
+                "target": "Usuario_18"
+            },
+            {
+                "weight": 15,
+                "source": "Servidor_4",
+                "target": "Usuario_19"
+            },
+            {
+                "weight": 21,
+                "source": "Servidor_4",
+                "target": "Usuario_20"
+            },
+            {
+                "weight": 31,
+                "source": "Servidor_4",
+                "target": "Usuario_21"
+            },
+            {
+                "weight": 13,
+                "source": "Servidor_4",
+                "target": "Usuario_23"
+            },
+            {
+                "weight": 24,
+                "source": "Servidor_4",
+                "target": "Usuario_26"
+            },
+            {
+                "weight": 24,
+                "source": "Servidor_4",
+                "target": "Usuario_28"
+            },
+            {
+                "weight": 24,
+                "source": "Servidor_5",
+                "target": "Usuario_2"
+            },
+            {
+                "weight": 19,
+                "source": "Servidor_5",
+                "target": "Usuario_5"
+            },
+            {
+                "weight": 17,
+                "source": "Servidor_5",
+                "target": "Usuario_6"
+            },
+            {
+                "weight": 12,
+                "source": "Servidor_5",
+                "target": "Usuario_7"
+            },
+            {
+                "weight": 29,
+                "source": "Servidor_5",
+                "target": "Usuario_8"
+            },
+            {
+                "weight": 29,
+                "source": "Servidor_5",
+                "target": "Usuario_9"
+            },
+            {
+                "weight": 32,
+                "source": "Servidor_5",
+                "target": "Usuario_11"
+            },
+            {
+                "weight": 11,
+                "source": "Servidor_5",
+                "target": "Usuario_13"
+            },
+            {
+                "weight": 32,
+                "source": "Servidor_5",
+                "target": "Usuario_17"
+            },
+            {
+                "weight": 18,
+                "source": "Servidor_5",
+                "target": "Usuario_22"
+            },
+            {
+                "weight": 28,
+                "source": "Servidor_5",
+                "target": "Usuario_24"
+            },
+            {
+                "weight": 10,
+                "source": "Servidor_5",
+                "target": "Usuario_25"
+            },
+            {
+                "weight": 21,
+                "source": "Servidor_5",
+                "target": "Usuario_27"
+            },
+            {
+                "weight": 21,
+                "source": "Servidor_5",
+                "target": "Usuario_29"
+            }
+        ]
+    }
+}

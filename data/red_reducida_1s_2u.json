@@ -1,0 +1,55 @@
+{
+    "servidores": [
+        "Servidor_0"
+    ],
+    "usuarios": [
+        "Usuario_0",
+        "Usuario_1"
+    ],
+    "grafo": {
+        "directed": false,
+        "multigraph": false,
+        "graph": {},
+        "nodes": [
+            {
+                "tipo": "servidor",
+                "capacidad": 5,
+                "pos": [
+                    41,
+                    19
+                ],
+                "id": "Servidor_0"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    50,
+                    83
+                ],
+                "demanda": 1,
+                "id": "Usuario_0"
+            },
+            {
+                "tipo": "usuario",
+                "pos": [
+                    9,
+                    68
+                ],
+                "demanda": 1,
+                "id": "Usuario_1"
+            }
+        ],
+        "edges": [
+            {
+                "weight": 35,
+                "source": "Servidor_0",
+                "target": "Usuario_0"
+            },
+            {
+                "weight": 28,
+                "source": "Servidor_0",
+                "target": "Usuario_1"
+            }
+        ]
+    }
+}

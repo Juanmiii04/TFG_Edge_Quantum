@@ -5,7 +5,7 @@ def solver_exacto(G, lista_servidores, lista_usuarios):
     
     PENALIZACION = 1000
     
-    #Creamos el problema (minimización)
+    #Creamos el problema a resolver(en este caso minimizar la latencia)
     prob = pulp.LpProblem("Balanceo_Edge", pulp.LpMinimize)
     
     #Creamos las variables de decisión
@@ -15,12 +15,12 @@ def solver_exacto(G, lista_servidores, lista_usuarios):
     # y[u] vale 1 si el usuario u se queda sin asignar
     y = pulp.LpVariable.dicts("desconectado", lista_usuarios, cat='Binary')
                               
-    #Creamos la función objetivo(consiste en minimizar la latencia teniendo en cuenta los usuarios no asignados)
-    latencias_asignaciones = pulp.lpSum(x[u, s] * G[u][s]['weight'] for u in lista_usuarios for s in G[u])
-    latencias_penalizaciones = pulp.lpSum(y[u] * PENALIZACION for u in lista_usuarios)
-    prob += latencias_asignaciones + latencias_penalizaciones, "Latencia_Total"
+    #Creamos la función objetivo(consiste en minimizar la latencia teniendo en cuenta la penalización que conlleva los usuarios que no se asignen a ningun servidor)
+    latencias_asignaciones = pulp.lpSum(x[u, s] * G[u][s]['weight'] for u in lista_usuarios for s in G[u]) #latencia total de los usuarios que han conseguido conectarse(x[u, s]=1)
+    latencias_penalizaciones = pulp.lpSum(y[u] * PENALIZACION for u in lista_usuarios)#latencia total de los usuarios que no se han conectado(x[u, s]=0 y y[u]=1 )
+    prob += latencias_asignaciones + latencias_penalizaciones, "Latencia_Total" #prueba todas las combinaciones de los sumatorios anteriores hasta dar con el de menor latencia
     
-    #Creamos las restricciones 
+    #Creamos las restricciones físicas(no todas las combinaciones están permitidas)
     #Restricción 1: Cada usuario se conecta a un único servidor, o se queda desconectado (y=1)
     for u in lista_usuarios:
         prob += pulp.lpSum(x[u, s] for s in G[u]) + y[u] == 1, f"Asignacion_Unica_o_Desconexion_{u}"
@@ -59,18 +59,30 @@ def solver_exacto(G, lista_servidores, lista_usuarios):
     latencia_penalizacion = len(usuarios_sin_asignar) * PENALIZACION
     latencia_total = latencia_asignada + latencia_penalizacion
         
-    #Imprimimos los  resultados igual que el algoritmo voraz
+    #imprimimos los resultados 
     for servidor in lista_servidores:
-        usuarios_este_servidor = [
-            f"{u} ({asignaciones[u][1]}ms, dem: {G.nodes[u].get('demanda', 1)})" 
-            for u in asignaciones if asignaciones[u][0] == servidor
-        ]
-        print(f" {servidor} (Ocupación recursos: {ocupacion_servidores[servidor]}/{G.nodes[servidor]['capacidad']}): {', '.join(usuarios_este_servidor)}")
+        usuarios_este_servidor = []
+        
+        # Desempaquetamos el diccionario de asignaciones 
+        for u, (servidor_asignado, latencia) in asignaciones.items():
+            if servidor_asignado == servidor:
+                demanda = G.nodes[u].get('demanda', 1)
+                usuarios_este_servidor.append(f"{u} ({latencia}ms, dem: {demanda})")
+                
+        # Extraemos los datos del servidor a variables limpias
+        ocupacion = ocupacion_servidores[servidor]
+        capacidad = G.nodes[servidor]['capacidad']
+        texto_usuarios = ', '.join(usuarios_este_servidor)
+        
+        print(f" {servidor} (Ocupación recursos: {ocupacion}/{capacidad}): {texto_usuarios}")
         
     print(f"\n Latencia total de la red (Exacto): {latencia_total} ms")
-    if usuarios_sin_asignar:
-        print(f" -> Detalle: {latencia_asignada} ms (Asignados) + {latencia_penalizacion} ms (Penalización por {len(usuarios_sin_asignar)} desconectados)")
-        print(f" Usuarios desconectados: {', '.join(usuarios_sin_asignar)}")
-   
     
+    if usuarios_sin_asignar:
+        num_desc = len(usuarios_sin_asignar)
+        texto_desc = ', '.join(usuarios_sin_asignar)
+        
+        print(f" -> Latencia total detallada: {latencia_asignada} ms (Asignados) + {latencia_penalizacion} ms (Penalización por {num_desc} desconectados)")
+        print(f" Usuarios desconectados: {texto_desc}")
+   
     return asignaciones, latencia_total

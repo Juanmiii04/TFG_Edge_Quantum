@@ -1,3 +1,11 @@
 .venv/
 __pycache__/
 .ipynb_checkpoints/
+
+# Cosas de herramientas de IA que uso para programar, no son parte del proyecto
+.claude/
+CLAUDE.md
+historial_conversacion.md
+
+# Memoria del TFG (documento en progreso, no forma parte del código)
+TFG_Memoria_Esqueleto.docx
