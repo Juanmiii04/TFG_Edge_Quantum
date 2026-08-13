@@ -1,11 +1,8 @@
 import itertools
 
+from src.constantes import PENALIZACION
 from src.generador_red import generar_red
 from src.solver_exacto import solver_exacto
-
-# Mismo valor que usa internamente solver_exacto (constante duplicada, no
-# centralizada -- ver CLAUDE.md).
-PENALIZACION = 1000
 
 
 def _mejor_latencia_por_fuerza_bruta(G, servidores, usuarios):

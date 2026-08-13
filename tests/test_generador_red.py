@@ -66,3 +66,18 @@ def test_cambiar_lado_area_cambia_el_rango_de_coordenadas():
     assert max(coords_pequena) <= 10
     assert max(coords_grande) <= 1000
     assert max(coords_grande) > max(coords_pequena)
+
+
+def test_todas_las_latencias_son_positivas():
+    # latencia_total = int(latencia_base=5.0 + retardo_saltos>=0 + ruido_red), con
+    # ruido_red en [-2.0, 5.0]: en el peor caso, sin ningún salto de router de por
+    # medio, el mínimo teórico es 5.0 - 2.0 = 3.0 -> int(3.0) = 3, así que con estos
+    # parámetros nunca debería salir una latencia de 0 o negativa. Probamos con
+    # varias redes/seeds y radio amplio (todos los usuarios contra todos los
+    # servidores) para tener muchas aristas donde el ruido pueda acercarse al mínimo.
+    for seed in range(10):
+        G, _servidores, _usuarios = generar_red(
+            num_serv=5, num_usr=40, capacidad_max=6, radio_cobertura=200, seed=seed, lado_area=100
+        )
+        for _, _, datos in G.edges(data=True):
+            assert datos["weight"] > 0

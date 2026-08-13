@@ -6,9 +6,66 @@ from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.algorithms import MinimumEigenOptimizer
 from qiskit_algorithms import QAOA
 from qiskit_algorithms.optimizers import COBYLA
-from qiskit.primitives import StatevectorSampler 
+from qiskit.primitives import StatevectorSampler
+
+from src.constantes import PENALIZACION
 
 warnings.filterwarnings('ignore') # Ocultar avisos internos de qiskit
+
+
+def construir_qubo(G, lista_servidores, lista_usuarios):
+    """
+    Construye el QuadraticProgram del modelo de balanceo de carga (variables, función
+    objetivo y restricciones), sin llegar a resolverlo. Separado de solver_cuantico
+    para que tanto el solver como los tests usen exactamente la misma construcción del
+    modelo -- si el modelo cambia (se añade una restricción, por ejemplo), no hay una
+    copia duplicada en los tests que se pueda quedar desactualizada sin que salte nada.
+
+    Devuelve (qp, x_vars, y_vars): x_vars/y_vars hacen falta después para traducir el
+    resultado de QAOA (valores 0/1 por variable) de vuelta a asignaciones usuario ->
+    servidor.
+    """
+    qp = QuadraticProgram("Balanceo_Edge_Cuantico")
+
+    #Variables de decisión(cada posible decisión equivale a un qubit)
+    x_vars = {} #vale 1 si se asigna a un servidor s
+    for u in lista_usuarios:
+        for s in G[u]:
+            var_name = f"x_{u}_{s}"
+            qp.binary_var(name=var_name)
+            x_vars[(u, s)] = var_name
+
+    y_vars = {} #vale 1 si no tiene sitio en un servidor
+    for u in lista_usuarios:
+        var_name = f"y_{u}"
+        qp.binary_var(name=var_name)
+        y_vars[u] = var_name
+
+    #Función Objetivo(misma idea que con el solver exacto, pero con  Qiskit-Optimization la librería de traducción matemática de IBM)
+    obj_linear = {}
+    for u in lista_usuarios:
+        for s in G[u]:
+            obj_linear[x_vars[(u, s)]] = G[u][s]['weight'] #asignamos la latencia a cada una de las variables de decisión
+        obj_linear[y_vars[u]] = PENALIZACION #si un usuario no se conecta a ningún servidor
+
+    qp.minimize(linear=obj_linear)
+
+    #Restricción 1 -> Asignación Única o Desconexión
+    for u in lista_usuarios:
+        lin_dict = {x_vars[(u, s)]: 1 for s in G[u]}
+        lin_dict[y_vars[u]] = 1
+        qp.linear_constraint(linear=lin_dict, sense='==', rhs=1, name=f"Asignacion_{u}")
+
+    #Restricción 2 -> Capacidad de los servidores
+    for s in lista_servidores:
+        lin_dict = {}
+        for u in lista_usuarios:
+            if s in G[u]:
+                lin_dict[x_vars[(u, s)]] = G.nodes[u].get('demanda', 1)
+        qp.linear_constraint(linear=lin_dict, sense='<=', rhs=G.nodes[s]['capacidad'], name=f"Capacidad_{s}")
+
+    return qp, x_vars, y_vars
+
 
 def solver_cuantico(G, lista_servidores, lista_usuarios, backend='simulador'):
     """
@@ -19,58 +76,19 @@ def solver_cuantico(G, lista_servidores, lista_usuarios, backend='simulador'):
     lee ni se escribe en ningún sitio de este archivo, por lo que es privado.
     """
     print("Iniciamos algoritmo cuántico (QAOA con Qiskit):")
-    
-    PENALIZACION = 1000
-    
+
     #Creamos el modelo matemático (muy similar al solver exacto)
-    qp = QuadraticProgram("Balanceo_Edge_Cuantico")
-    
-    #Variables de decisión(cada posible decisión equivale a un qubit)
-    x_vars = {} #vale 1 si se asigna a un servidor s
-    for u in lista_usuarios:
-        for s in G[u]:
-            var_name = f"x_{u}_{s}"
-            qp.binary_var(name=var_name)
-            x_vars[(u, s)] = var_name
-            
-    y_vars = {} #vale 1 si no tiene sitio en un servidor 
-    for u in lista_usuarios:
-        var_name = f"y_{u}"
-        qp.binary_var(name=var_name)
-        y_vars[u] = var_name
-        
+    qp, x_vars, y_vars = construir_qubo(G, lista_servidores, lista_usuarios)
+
     num_vars = qp.get_num_vars()
     print(f" -> Construyendo QUBO con {num_vars} variables cuánticas (qubits base).")
 
-    #a nuestro ordenador le cuesta mucho similar qubits, por eso tenemos que tener cuidado 
+    #a nuestro ordenador le cuesta mucho similar qubits, por eso tenemos que tener cuidado
     if num_vars > 20:
         print("\n Cuidado estás intentando simular más de 20 qubits")
         print(" Esto puede consumir muchos recursos de tu PC y tardar horas")
         print(" Para pruebas cuánticas iniciales recomendamos: 1-2 Servidores y 2-4 Usuarios.\n")
-        
-    #Función Objetivo(misma idea que con el solver exacto, pero con  Qiskit-Optimization la librería de traducción matemática de IBM)
-    obj_linear = {}
-    for u in lista_usuarios:
-        for s in G[u]:
-            obj_linear[x_vars[(u, s)]] = G[u][s]['weight'] #asignamos la latencia a cada una de las variables de decisión
-        obj_linear[y_vars[u]] = PENALIZACION #si un usuario no se conecta a ningún servidor 
-        
-    qp.minimize(linear=obj_linear)
-    
-    #Restricción 1 -> Asignación Única o Desconexión
-    for u in lista_usuarios:
-        lin_dict = {x_vars[(u, s)]: 1 for s in G[u]}
-        lin_dict[y_vars[u]] = 1
-        qp.linear_constraint(linear=lin_dict, sense='==', rhs=1, name=f"Asignacion_{u}")
-        
-    #Restricción 2 -> Capacidad de los servidores
-    for s in lista_servidores:
-        lin_dict = {}
-        for u in lista_usuarios:
-            if s in G[u]:
-                lin_dict[x_vars[(u, s)]] = G.nodes[u].get('demanda', 1)
-        qp.linear_constraint(linear=lin_dict, sense='<=', rhs=G.nodes[s]['capacidad'], name=f"Capacidad_{s}")
-        
+
     # 6. Configurar QAOA (Mejoras V2 aplicadas)
     print(" -> Configurando Optimizador QAOA y Sampler V2...")
     optimizer_clasico = COBYLA(maxiter=300, disp=True)

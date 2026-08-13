@@ -1,10 +1,11 @@
 import pulp
 
+from src.constantes import PENALIZACION
+
+
 def solver_exacto(G, lista_servidores, lista_usuarios):
     print("Iniciamos algoritmo exacto (PuLP):")
-    
-    PENALIZACION = 1000
-    
+
     #Creamos el problema a resolver(en este caso minimizar la latencia)
     prob = pulp.LpProblem("Balanceo_Edge", pulp.LpMinimize)
     

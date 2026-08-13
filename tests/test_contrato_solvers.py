@@ -1,11 +1,8 @@
 import pytest
 
+from src.constantes import PENALIZACION
 from src.solver_exacto import solver_exacto
 from src.solver_voraz import solver_voraz
-
-# Mismo valor que usan internamente los solvers (constante duplicada, no
-# centralizada -- ver CLAUDE.md).
-PENALIZACION = 1000
 
 SOLVERS = [solver_voraz, solver_exacto]
 
@@ -26,8 +23,14 @@ def test_formato_resultado(solver, red_pequena_ok):
 
 
 @pytest.mark.parametrize("solver", SOLVERS)
-def test_no_se_supera_la_capacidad_de_ningun_servidor(solver, red_pequena_ok):
-    G, servidores, usuarios = red_pequena_ok
+@pytest.mark.parametrize("nombre_fixture_red", ["red_pequena_ok", "red_pequena_sobrecargada"])
+def test_no_se_supera_la_capacidad_de_ningun_servidor(solver, nombre_fixture_red, request):
+    # Con red_pequena_ok la capacidad va tan sobrada que casi cualquier asignación la
+    # respeta, incluso una mal calculada -- así que también se prueba con
+    # red_pequena_sobrecargada (capacidad=1), donde de verdad se roza el límite y un
+    # bug real en la comprobación de hueco (contar servidores, no ocupación) se
+    # detecta.
+    G, servidores, usuarios = request.getfixturevalue(nombre_fixture_red)
 
     asignaciones, _latencia_total = solver(G, servidores, usuarios)
 

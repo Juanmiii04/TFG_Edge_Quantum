@@ -1,8 +1,9 @@
+from src.constantes import PENALIZACION
+
+
 def solver_voraz(G, lista_servidores, lista_usuarios):
     print("Iniciamos algoritmo voraz:")
-    
-    PENALIZACION = 1000 #para los usuarios que se queden sin asignar
-    
+
     #Prepararamos los  contadores
     ocupacion_servidores = {s: 0 for s in lista_servidores}#con un diccionario llevamos la ocupación de cada servidor
     asignaciones = {} # Guardamos el usuario y la latencia en el servidor que hemos asignado
